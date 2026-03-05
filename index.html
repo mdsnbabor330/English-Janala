@@ -42,8 +42,8 @@
   </head>
   <body>
     <header>
-      <div class="navbar shadow-sm">
-        <div class="navbar-start">
+      <div class="navbar shadow-sm px-10">
+        <div class="navbar-start ">
           <div class="dropdown">
             <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
               <svg
@@ -157,9 +157,18 @@
           class="flex gap-3 flex-wrap justify-center"
         ></div>
       </section>
-      <section id="spinner" class="flex justify-center items-center  hidden">
+      <section id="spinner" class="flex justify-center items-center hidden">
         <span class="loading loading-infinity loading-xl m-20"></span>
       </section>
+      <section class="flex justify-center mt-8"><div class="join">
+        <div>
+          <label class="input validator join-item outline-none">
+            <input id="input-search" type="text" placeholder="Search" required />
+          </label>
+        </div>
+        <button id="btn-search" class="btn btn-primary join-item">Search</button>
+      </div></section>
+      
       <section
         id="word-container"
         class="bg-gray-100 w-11/12 mx-auto rounded-sm p-10 mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8"
@@ -174,11 +183,10 @@
 
       <!-- Modal -->
       <dialog id="word_modal" class="modal modal-bottom sm:modal-middle">
-        <div class="modal-box ">
-          <div id="ditails-container" class="space-y-6">
-          </div>
+        <div class="modal-box">
+          <div id="ditails-container" class="space-y-6"></div>
           <div class="modal-action justify-start">
-            <form method="dialog" >
+            <form method="dialog">
               <button class="btn btn-primary">Complete Learning</button>
             </form>
           </div>

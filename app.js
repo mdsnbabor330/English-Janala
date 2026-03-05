@@ -117,3 +117,17 @@ const displayLesson=(lessons)=>{
 };
 
 loadLession();
+
+document.getElementById("btn-search").addEventListener("click", ()=>{
+    removeBtn();
+    const input = document.getElementById("input-search");
+    const searchValue= input.value.trim().toLowerCase();
+    fetch('https://openapi.programming-hero.com/api/words/all')
+    .then((res)=>res.json())
+    .then((json)=>{
+        const allWords = json.data;
+        const filterWords= allWords.filter((word)=> word.word.toLowerCase().includes(searchValue));
+        displayWord(filterWords);
+    });
+})
+

@@ -5,6 +5,7 @@ const loadLession=()=>{
 };
 
 const lesonWord=(id)=>{
+    manageSpinner(true);
     const url=`https://openapi.programming-hero.com/api/level/${id}`
     fetch(url)
     .then((res)=>res.json())
@@ -19,6 +20,47 @@ const removeBtn=()=>{
     lessonButtons.forEach((lesBtn)=> lesBtn.classList.remove("active"));
 }
 
+const loadWordDetail= async(id)=>{
+ const url=`https://openapi.programming-hero.com/api/word/${id}`;
+ const res= await fetch(url);
+ const details= await res.json();
+ displayWordDetails(details.data);
+}
+
+const createElements =(arr)=>{
+    const htmlEliments = arr.map((el)=>`<span class="btn btn-outline btn-info">${el}</span>`);
+    return htmlEliments.join(" ");
+};
+
+const manageSpinner=(status)=>{
+    if(status==true){
+        document.getElementById("spinner").classList.remove("hidden");
+        document.getElementById("word-container").classList.add("hidden");
+    }
+    else{
+         document.getElementById("spinner").classList.add("hidden");
+        document.getElementById("word-container").classList.remove("hidden");
+    }
+}
+
+const displayWordDetails=(word)=>{
+    const details=document.getElementById("ditails-container");
+    details.innerHTML=`
+        <h3 class="text-[38px] font-semibold">${word.word} (
+        <i class="fa-solid fa-microphone">
+        </i>:${word.pronunciation})</h3>
+        <h4 class="text-xl font-semibold">Meaning</h4>
+        <p class="font-bn">${word.meaning}</p>
+        <h4 class="text-xl font-semibold">Example</h4>
+        <p>${word.sentence}</p>
+        <h4 class="text-xl font-semibold font-bn">সমার্থক শব্দ গুলো</h4>
+        <div class="">
+        ${createElements(word.synonyms)}
+        </div>
+          `;
+    document.getElementById("word_modal").showModal();
+}
+
 const displayWord= (words)=>{
     const wordContainer = document.getElementById("word-container");
     wordContainer.innerHTML="";
@@ -31,6 +73,8 @@ const displayWord= (words)=>{
           <p class="text-[34px] font-medium">নেক্সট Lesson এ যান</p>
         </div>
         `;
+        manageSpinner(false);
+        return
     }
     for(let word of words){
         const wordCard= document.createElement('div');
@@ -42,7 +86,7 @@ const displayWord= (words)=>{
                 <p class="text-[28px] font-bn font-semibold text-[#4d4d50]"
                 // >${word.meaning? word.meaning:"অর্থ পাওয়া যায়নি"}/${word.pronunciation?word.pronunciation:"উচ্চারণ পাওয়া যায়নি"}</p>
                 <div class="mt-8">
-                <button onclick="my_modal_5.showModal()" class="btn bg-sky-100">
+                <button onclick="loadWordDetail(${word.id})" class="btn bg-sky-100">
                 <i class="fa-solid fa-circle-info"></i>
                 </button>
                 <button class="btn bg-sky-100">
@@ -54,6 +98,7 @@ const displayWord= (words)=>{
         `;
         wordContainer.appendChild(wordCard);
     }
+    manageSpinner(false);
 }
 
 const displayLesson=(lessons)=>{
@@ -70,4 +115,5 @@ const displayLesson=(lessons)=>{
             }
     
 };
+
 loadLession();

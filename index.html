@@ -157,6 +157,9 @@
           class="flex gap-3 flex-wrap justify-center"
         ></div>
       </section>
+      <section id="spinner" class="flex justify-center items-center  hidden">
+        <span class="loading loading-infinity loading-xl m-20"></span>
+      </section>
       <section
         id="word-container"
         class="bg-gray-100 w-11/12 mx-auto rounded-sm p-10 mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8"
@@ -168,16 +171,15 @@
           <p class="text-[34px] font-medium">একটি Lesson Select করুন।</p>
         </div>
       </section>
-      <!-- Open the modal using ID.showModal() method -->
-      <!-- <button class="btn" onclick="my_modal_5.showModal()">open modal</button> -->
-      <dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle">
-        <div class="modal-box">
-          <h3 class="text-lg font-bold">Hello!</h3>
-          <p class="py-4">Press ESC key or click the button below to close</p>
-          <div class="modal-action">
-            <form method="dialog">
-              <!-- if there is a button in form, it will close the modal -->
-              <button class="btn">Close</button>
+
+      <!-- Modal -->
+      <dialog id="word_modal" class="modal modal-bottom sm:modal-middle">
+        <div class="modal-box ">
+          <div id="ditails-container" class="space-y-6">
+          </div>
+          <div class="modal-action justify-start">
+            <form method="dialog" >
+              <button class="btn btn-primary">Complete Learning</button>
             </form>
           </div>
         </div>
